@@ -23,14 +23,22 @@ function dotBig(event){
     const {clientX, clientY} = event;
     dotList.forEach(function(dot){
         let distance = 1;
+        let translateDistanceX = 0;
+        let translateDistanceY = 0;
         rect = dot.getBoundingClientRect();
         if(Math.abs(clientY - rect.top) < 200 && Math.abs(clientX - rect.left) < 200){
-            distance = 5 - Math.hypot(clientX - rect.left, clientY - rect.top)/100;
+            let hyp = Math.hypot(clientX - rect.left, clientY - rect.top)/100;
+            distance = sizeFunction(hyp);
+            translateDistanceX = -(clientX - rect.left) / 35
+            translateDistanceY = -(clientY - rect.top)/ 35
         }
-        dot.style.transform = `scale(${distance})`
+        dot.style.transform = `scale(${distance}) translate(${translateDistanceX}px, ${translateDistanceY}px)`
         //dot.style.filter  = `invert(${xTransform})`
     })
 }
 
+function sizeFunction(x){
+    return (5.5/(Math.pow(Math.abs(x), 2)+1))
+}
 
 //next prject i want to use more vars, also less global space... need learning HAHAHA
