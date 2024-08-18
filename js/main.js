@@ -17,7 +17,7 @@ originalDot.style.filter = 'opacity(0%)';
 
 //make dot big!
 document.onpointermove = event => { //very unoptimized, but bear with me
-    dotBig(event);
+    requestAnimationFrame( ()=> dotBig(event));
 }
 
 function dotBig(event){
